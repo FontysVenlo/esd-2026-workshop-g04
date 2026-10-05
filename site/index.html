@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>CI/CD Workshop</title>
+  <link rel="stylesheet" href="./style.css">
+  <script type="module" src="./app.js"></script>
+</head>
+<body>
+  <main>
+    <header>
+      <span class="version">Version 1.0</span>
+      <h1>CI/CD Workshop</h1>
+      <p>A small website. Three ways to handle a code change.</p>
+    </header>
+
+    <section class="modes" aria-label="Pipeline comparison">
+      <article>
+        <h2>CI alone</h2>
+        <p>Check the code. Show whether tests pass.</p>
+      </article>
+      <article>
+        <h2>CD alone</h2>
+        <p>Publish the website without running tests.</p>
+      </article>
+      <article>
+        <h2>CI + CD</h2>
+        <p>Check first. Publish only when tests pass.</p>
+      </article>
+    </section>
+
+    <section class="calculator" aria-labelledby="calculator-title">
+      <h2 id="calculator-title">Does our calculator work?</h2>
+      <p>Try 2 + 3. The result should be 5.</p>
+      <form id="calculator-form">
+        <label>
+          First number
+          <input id="first-number" type="number" step="any" value="2" required>
+        </label>
+        <label>
+          Second number
+          <input id="second-number" type="number" step="any" value="3" required>
+        </label>
+        <button type="submit">Calculate sum</button>
+      </form>
+      <p id="result" role="status">Result: —</p>
+    </section>
+  </main>
+</body>
+</html>
