@@ -1,0 +1,56 @@
+name: CI + CD
+
+on:
+  push:
+    branches:
+      - feature/ci-cd-demo
+
+permissions:
+  contents: read
+
+concurrency:
+  group: github-pages
+  cancel-in-progress: false
+
+jobs:
+  test:
+    if: contains(github.event.head_commit.message, '[ci-cd]')
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check out the code
+        uses: actions/checkout@v6
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v6
+        with:
+          node-version: "24"
+
+      - name: Test the calculator
+        run: npm test
+
+  deploy:
+    needs: test
+    runs-on: ubuntu-latest
+
+    permissions:
+      contents: read
+      pages: write
+      id-token: write
+
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+
+    steps:
+      - name: Check out the code
+        uses: actions/checkout@v6
+
+      - name: Upload the website
+        uses: actions/upload-pages-artifact@v4
+        with:
+          path: site
+
+      - name: Publish the website
+        id: deployment
+        uses: actions/deploy-pages@v4
